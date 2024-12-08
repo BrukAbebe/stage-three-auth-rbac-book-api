@@ -1,0 +1,470 @@
+{
+	"info": {
+		"_postman_id": "f9629d3f-6074-4d5e-ad38-d47927b4ed7c",
+		"name": "BookApi",
+		"description": "This collection contains all API endpoints for the Book Collection API. It demonstrates the use of authentication, role-based access, and book management features.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33465266"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "admin",
+					"item": [
+						{
+							"name": "sign in",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"admin_User@gmail.com\", \r\n  \"password\": \"12345678\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login"
+									]
+								},
+								"description": "Use this endpoint to authenticate as an admin and generate a JWT token.\n\n- **Headers:**  \n    `Content-Type: application/json`\n    \n- **Body Parameters:**\n    \n    - `email`: Admin's email address.\n        \n    - `password`: Admin's password.\n        \n- **Response:**  \n    Returns the admin's details and a JWT token."
+							},
+							"response": []
+						},
+						{
+							"name": "sign up",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"firstName\": \"Admin\",\r\n  \"lastName\": \"User\",\r\n  \"username\": \"admin_User\",\r\n  \"email\": \"admin_User@gmail.com\",\r\n  \"password\": \"12345678\",\r\n  \"role\": \"admin\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/signup",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"signup"
+									]
+								},
+								"description": "Use this endpoint to create a new admin account.\n\n- **Headers:**  \n    `Content-Type: application/json`\n    \n- **Body Parameters:**\n    \n    - `firstName`: Admin's first name.\n        \n    - `lastName`: Admin's last name.\n        \n    - `username`: Unique username for the admin.\n        \n    - `email`: Admin's email address.\n        \n    - `password`: Admin's password.\n        \n    - `role`: Must be `admin` for admin accounts.\n        \n- **Response:**  \n    Returns the admin's details on success."
+							},
+							"response": []
+						}
+					],
+					"description": "Endpoints for admin-level authentication. Use these to create and log in as an administrator."
+				},
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "sign in",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"userRegular@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login"
+									]
+								},
+								"description": "Use this endpoint to authenticate as a regular user and generate a JWT token.\n\n- **Headers:**  \n    `Content-Type: application/json`\n    \n- **Body Parameters:**\n    \n    - `email`: User's email address.\n        \n    - `password`: User's password.\n        \n- **Response:**  \n    Returns the user's details and a JWT token."
+							},
+							"response": []
+						},
+						{
+							"name": "sign up",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"firstName\": \"Regular\",\r\n  \"lastName\": \"User\",\r\n  \"username\": \"regular\",\r\n  \"email\": \"userRegular@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/signup",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"signup"
+									]
+								},
+								"description": "Use this endpoint to create a new regular user account.\n\n- **Headers:**  \n    `Content-Type: application/json`\n    \n- **Body Parameters:**\n    \n    - `firstName`: User's first name.\n        \n    - `lastName`: User's last name.\n        \n    - `username`: Unique username for the user.\n        \n    - `email`: User's email address.\n        \n    - `password`: User's password.\n        \n- **Response:**  \n    Returns the user's details on success."
+							},
+							"response": []
+						}
+					],
+					"description": "Endpoints for user-level authentication. Use these to create and log in as a regular user."
+				}
+			],
+			"description": "Contains authentication routes for admin and user accounts. Each folder includes endpoints for signing up and signing in."
+		},
+		{
+			"name": "book",
+			"item": [
+				{
+					"name": "admin only",
+					"item": [
+						{
+							"name": "Get All Books",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NTU3YWUzZGJmNjMwMWM3Yjk5NmZmNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMzY1NTQ2NiwiZXhwIjoxNzMzNzQxODY2fQ.M8B0GMZIgIDvOTBDRG-1M2XpWerkMVK33REAUOJd91c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/books/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"books",
+										"all"
+									]
+								},
+								"description": "Retrieve all books in the database. Requires an admin token for access.\n\n- **Headers:**\n    \n    - `Authorization`: Bearer token of an admin account.\n        \n- **Response:**  \n    Returns a list of all books."
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Favorite Books",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NTU3YWUzZGJmNjMwMWM3Yjk5NmZmNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMzY1NTQ2NiwiZXhwIjoxNzMzNzQxODY2fQ.M8B0GMZIgIDvOTBDRG-1M2XpWerkMVK33REAUOJd91c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/books/favorites/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"books",
+										"favorites",
+										"all"
+									]
+								},
+								"description": "Retrieve all favorite books from all users. Requires an admin token for access.\n\n- **Headers:**\n    \n    - `Authorization`: Bearer token of an admin account.\n        \n- **Response:**  \n    Returns a list of all favorite books from all users."
+							},
+							"response": []
+						}
+					],
+					"description": "Contains endpoints accessible only by admin users. Ensure you use an admin JWT token in the Authorization header."
+				},
+				{
+					"name": "user only",
+					"item": [
+						{
+							"name": "Get User's Books",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NTU3ZmNlZjkxYTNhNGExNjVhYTBkMSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzMzNjU2NTQxLCJleHAiOjE3MzM3NDI5NDF9.EJTqocX93cQhe7FEliyJjHvEsxyG6Sms1YdO4LxAd1c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/books/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"books",
+										""
+									]
+								},
+								"description": "Retrieve books created by the authenticated user.\n\n- **Headers:**\n    \n    - `Authorization`: Bearer token of the user.\n        \n- **Response:**  \n    Returns a list of books owned by the user."
+							},
+							"response": []
+						},
+						{
+							"name": "Get User's Favorite Books",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NTU3ZmNlZjkxYTNhNGExNjVhYTBkMSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzMzNjU2NTQxLCJleHAiOjE3MzM3NDI5NDF9.EJTqocX93cQhe7FEliyJjHvEsxyG6Sms1YdO4LxAd1c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/books/favorites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"books",
+										"favorites"
+									]
+								},
+								"description": "Retrieve the favorite books of the authenticated user.\n\n- **Headers:**\n    \n    - `Authorization`: Bearer token of the user.\n        \n- **Response:**  \n    Returns a list of the user's favorite books."
+							},
+							"response": []
+						}
+					],
+					"description": "Contains endpoints accessible only by authenticated users. Use a valid user JWT token in the Authorization header."
+				},
+				{
+					"name": "Users & Admin",
+					"item": [
+						{
+							"name": "Create a Book",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NTU3ZmNlZjkxYTNhNGExNjVhYTBkMSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzMzNjU2NTQxLCJleHAiOjE3MzM3NDI5NDF9.EJTqocX93cQhe7FEliyJjHvEsxyG6Sms1YdO4LxAd1c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Harry Potter and the Sorcerer's Stone\",\r\n    \"author\": \"J.K. Rowling\",\r\n    \"isbn\": \"97804397081809\",\r\n    \"publishedYear\": 1997,\r\n    \"averageRating\": 4.5,\r\n    \"favorite\": true\r\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/books",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"books"
+									]
+								},
+								"description": "This endpoint allows a user or admin to create a new book.\n\n- **Headers:**\n    \n    - `Authorization`: Bearer token of the user or admin.\n        \n    - `Content-Type`: application/json.\n        \n- **Required Fields:**\n    \n    - `title`: Title of the book (string).\n        \n    - `author`: Author's name (string).\n        \n    - `isbn`: ISBN number of the book (string).\n        \n    - `publishedYear`: Year the book was published (number).\n        \n- **Optional Fields:**\n    \n    - `averageRating`: The book's average rating (number). Defaults to 0 if not provided.\n        \n    - `favorite`: Boolean indicating if the book is marked as a favorite. Defaults to `false` if not provided.\n        \n- **Response:**  \n    Returns the created book's details, including any optional fields provided."
+							},
+							"response": []
+						},
+						{
+							"name": "Update a Book",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NTU3ZmNlZjkxYTNhNGExNjVhYTBkMSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzMzNjU2NTQxLCJleHAiOjE3MzM3NDI5NDF9.EJTqocX93cQhe7FEliyJjHvEsxyG6Sms1YdO4LxAd1c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Updated Book Title\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/books/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"books",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "",
+											"description": "The unique identifier of the book. Replace `:id` in the URL with the book's ID. "
+										}
+									]
+								},
+								"description": "Updates the details of a specific book.\n\n- **Path Variable:**\n    \n    - `id`: The unique identifier of the book. Replace `:id` in the URL with the book's ID.\n        \n- **Headers:**\n    \n    - `Authorization`: Bearer token of the user or admin.\n        \n    - `Content-Type`: application/json.\n        \n- **Body Parameters:**\n    \n    - `title`: (Optional) New title for the book.\n        \n    - `author`: (Optional) New author name.\n        \n- **Response:**  \n    Returns the updated book details."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a Book",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NTU3ZmNlZjkxYTNhNGExNjVhYTBkMSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzMzNjU2NTQxLCJleHAiOjE3MzM3NDI5NDF9.EJTqocX93cQhe7FEliyJjHvEsxyG6Sms1YdO4LxAd1c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/books/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"books",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "",
+											"description": "The unique identifier of the book. Replace :id in the URL with the book's ID."
+										}
+									]
+								},
+								"description": "Deletes a specific book.\n\n- **Path Variable:**\n    \n    - `id`: The unique identifier of the book. Replace `:id` in the URL with the book's ID.\n        \n- **Headers:**\n    \n    - `Authorization`: Bearer token of the user or admin.\n        \n- **Response:**  \n    Returns a confirmation of the deleted book."
+							},
+							"response": []
+						},
+						{
+							"name": "Get recommendations",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NTU3ZmNlZjkxYTNhNGExNjVhYTBkMSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzMzNjU2NTQxLCJleHAiOjE3MzM3NDI5NDF9.EJTqocX93cQhe7FEliyJjHvEsxyG6Sms1YdO4LxAd1c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/books/recommendations",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"books",
+										"recommendations"
+									]
+								},
+								"description": "Retrieve book recommendations based on the user's favorite books or general trends.\n\n- **Headers:**\n    \n    - `Authorization`: Bearer token of the user or admin.\n        \n- **Response:**  \n    Returns a list of recommended books."
+							},
+							"response": []
+						}
+					],
+					"description": "Contains endpoints accessible by both users and admin accounts. Use a valid JWT token in the Authorization header."
+				}
+			],
+			"description": "This folder contains endpoints for managing books, including admin-only, user-only, and shared requests for users and admins."
+		},
+		{
+			"name": "home",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000"
+				},
+				"description": "This endpoint returns a welcome message and basic information about the API. It does not require authentication or any parameters."
+			},
+			"response": []
+		}
+	]
+}

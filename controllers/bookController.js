@@ -95,7 +95,7 @@ const getUserFavoriteBooks = catchAsync(async (req, res) => {
     message:
       favorites.length > 0
         ? "Here are your favorite books."
-        : "You currently have no favorite books.",
+        : "You currently have no favorite books.", 
     data: favorites,
   });
 });

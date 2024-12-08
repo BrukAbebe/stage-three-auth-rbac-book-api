@@ -163,11 +163,9 @@ const getUserFavoriteBooks = async (userId) => {
     .populate("bookId")
     .exec()
     .then((userFavorites) => {
+     
       if (!userFavorites || userFavorites.length === 0) {
-        throw new ApiError(
-          StatusCodes.NOT_FOUND,
-          "No favorite books found for this user."
-        );
+        return [];
       }
       return userFavorites.map((favorite) => favorite.bookId);
     })
